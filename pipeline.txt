@@ -1,0 +1,31 @@
+┌────────────────────────────────────────────┐
+│         1. Data ingestion (mock)           │
+│    đọc file từ /data/ + metadata JSON      │
+└────────────────────────────────────────────┘
+                    │
+                    ▼
+┌────────────────────────────────────────────┐
+│       2. Text preprocessing & chunking     │
+│   - tách đoạn 300–800 tokens               │
+│   - giữ heading để context rõ ràng         │
+└────────────────────────────────────────────┘
+                    │
+                    ▼
+┌────────────────────────────────────────────┐
+│        3. Embedding & Vector storage       │
+│  - encode bằng BGE-small                   │
+│  - lưu vector + metadata vào Qdrant        │
+└────────────────────────────────────────────┘
+                    │
+                    ▼
+┌────────────────────────────────────────────┐
+│       4. Retrieval (dense search)          │
+│  - tìm theo vector + lọc theo doctype      │
+└────────────────────────────────────────────┘
+                    │
+                    ▼
+┌────────────────────────────────────────────┐
+│       5. LLM reasoning (local Llama)       │
+│  - prompt = context + câu hỏi              │
+│  - sinh câu trả lời kèm trích dẫn nguồn    │
+└────────────────────────────────────────────┘
